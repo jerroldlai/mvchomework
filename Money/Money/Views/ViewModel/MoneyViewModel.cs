@@ -7,9 +7,11 @@ namespace Money.Views.ViewModel
 {
     public class MoneyViewModel
     {
-       public string category { get; set; }
-       public string money { get; set; }
-       public string date { get; set; }
-       public string description { get; set; }
+        public string categoryyy { get; set; }
+        public string id { get; set; }
+        public string Amounttt { get; set; }
+        public DateTime dateee { get; set; }
+        public string remarkkk { get; set; }
+        public int status { get; set; }
     }
 }
