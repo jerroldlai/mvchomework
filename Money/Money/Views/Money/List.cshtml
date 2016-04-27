@@ -13,16 +13,16 @@
         </th>
 
         <th>
-            @Html.DisplayNameFor(model => model.categoryyy)
+            @Html.DisplayNameFor(model => model.category)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Amounttt)
+            @Html.DisplayNameFor(model => model.Money)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.dateee)
+            @Html.DisplayNameFor(model => model.Date)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.remarkkk)
+            @Html.DisplayNameFor(model => model.Remark)
         </th>
         <th></th>
     </tr>
@@ -34,19 +34,18 @@
                 @Html.DisplayFor(modelItem => item.id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.categoryyy)
+                @Html.Raw(ViewBag.DetermineColor(item.category))
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Amounttt)
+                @Html.DisplayFor(modelItem => item.Money)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.dateee)
+                @Html.DisplayFor(modelItem => item.Date)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.remarkkk)
+                @Html.DisplayFor(modelItem => item.Remark)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Money", new { id = item.id.ToString() })
                 @Html.ActionLink("Delete", "Delete", new { id = item.id.ToString() })
             </td>
         </tr>

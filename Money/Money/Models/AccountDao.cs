@@ -32,10 +32,10 @@ namespace Money.Models
             using (var command = new SqlCommand(sqlStatement, conn))
             {
                 command.Parameters.Add(new SqlParameter("Id", System.Guid.NewGuid().ToString()));
-                command.Parameters.Add(new SqlParameter("Categoryyy", instance.categoryyy));
-                command.Parameters.Add(new SqlParameter("Amounttt", instance.Amounttt));
-                command.Parameters.Add(new SqlParameter("Dateee", instance.dateee));
-                command.Parameters.Add(new SqlParameter("Remarkkk", instance.remarkkk));
+                command.Parameters.Add(new SqlParameter("Categoryyy", instance.category));
+                command.Parameters.Add(new SqlParameter("Amounttt", instance.Money));
+                command.Parameters.Add(new SqlParameter("Dateee", instance.Date));
+                command.Parameters.Add(new SqlParameter("Remarkkk", instance.Remark));
 
                 command.CommandType = CommandType.Text;
                 command.CommandTimeout = 180;
@@ -67,10 +67,10 @@ namespace Money.Models
             using (var command = new SqlCommand(sqlStatement, conn))
             {
                 command.Parameters.Add(new SqlParameter("Id", instance.id));
-                command.Parameters.Add(new SqlParameter("Categoryyy", instance.categoryyy));
-                command.Parameters.Add(new SqlParameter("Amounttt", instance.Amounttt));
-                command.Parameters.Add(new SqlParameter("Dateee", instance.dateee));
-                command.Parameters.Add(new SqlParameter("Remarkkk", instance.remarkkk));
+                command.Parameters.Add(new SqlParameter("Categoryyy", instance.category));
+                command.Parameters.Add(new SqlParameter("Amounttt", instance.Money));
+                command.Parameters.Add(new SqlParameter("Dateee", instance.Date));
+                command.Parameters.Add(new SqlParameter("Remarkkk", instance.Remark));
 
                 command.CommandType = CommandType.Text;
                 command.CommandTimeout = 180;
@@ -145,16 +145,25 @@ namespace Money.Models
                         var item = new MoneyViewModel
                         {
                             id = reader["Id"].ToString(),
-                            Amounttt = reader["Amounttt"].ToString(),
-                            categoryyy = reader["Categoryyy"].ToString(),
-                            dateee=Convert.ToDateTime(Convert.ToDateTime(reader["Dateee"].ToString()).ToString("yyyy-MM-dd HH:mm:ss")),
-                            remarkkk = reader["Remarkkk"].ToString(),
+                            Money = reader["Amounttt"].ToString(),
+                            category = Category_Name(reader["Categoryyy"].ToString()),
+                            Date = Convert.ToDateTime(reader["Dateee"]),
+                            Remark = reader["Remarkkk"].ToString(),
                         };
                         result.Add(item);
                     }
                 }
             }
             return result;
+        }
+        private string Category_Name(string c_id)
+        {
+            if (c_id == "0")
+                return "收入";
+            else if (c_id == "1")
+                return "支出";
+            else
+                return "N/A";
         }
 
         /// <summary>
@@ -183,10 +192,10 @@ namespace Money.Models
                     if (reader.Read())
                     {
                         result.id= reader["Id"].ToString();
-                        result.Amounttt = reader["Amounttt"].ToString();
-                        result.categoryyy = reader["Categoryyy"].ToString();
-                        result.dateee = Convert.ToDateTime(Convert.ToDateTime(reader["Dateee"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"));
-                        result.remarkkk = reader["Remarkkk"].ToString();
+                        result.Money = reader["Amounttt"].ToString();
+                        result.category = reader["Categoryyy"].ToString();
+                        result.Date = Convert.ToDateTime(Convert.ToDateTime(reader["Dateee"].ToString()).ToString("yyyy-MM-dd HH:mm:ss"));
+                        result.Remark = reader["Remarkkk"].ToString();
                     }
                 }
             }
