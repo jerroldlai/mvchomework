@@ -13,6 +13,7 @@ namespace Money.Controllers
         private AccountDao dao = new AccountDao();
         List<SelectListItem> listItems = new List<SelectListItem>();
         // GET: Money
+
         public ActionResult Money()
         {
             Initial_Items();
@@ -25,14 +26,18 @@ namespace Money.Controllers
             if (ModelState.IsValid)
             {
                 int row = dao.Insert(pagedata);
+
             }
-            return View();
+
+              return View();
         }
-        public ActionResult List()
+        [ChildActionOnly]
+        public ActionResult List(MoneyViewModel data)
         {
+            Initial_Items();
             var AccountLists = dao.GetAllLists();
             ViewBag.DetermineColor = new Func<string, string>(DetermineColor);
-            return View(AccountLists.ToList());
+            return PartialView(AccountLists.ToList());
         }
         private string DetermineColor(string category)
         {
